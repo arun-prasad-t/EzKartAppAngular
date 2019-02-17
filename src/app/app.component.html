@@ -1,0 +1,53 @@
+
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+  <a class="navbar-brand" href="#">EzKart</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+   <ul class="navbar-nav navi">
+    <li class="nav-item active" >
+        <form class="form-inline">
+        <mat-icon [inline]="true">home</mat-icon>
+        <a class="nav-link active" href="#">Home</a>
+        </form>
+    </li>
+    <li class="nav-item">
+        <form class="form-inline">
+        <mat-icon [inline]="true">shopping_cart</mat-icon>
+        <a class="nav-link" href="{{productsUrl}}">Products</a>
+        </form>
+    </li>
+    <li class="nav-item" [hidden]='!isLoggedIn'>
+       <form class="form-inline">
+        <mat-icon [inline]="true">face</mat-icon>
+        <a class="nav-link" href="{{profileUrl}}">Profile</a>
+        </form>      
+    </li>
+    <li class="nav-item" [hidden]='!isLoggedIn'>
+      <form class="form-inline">
+       <mat-icon [inline]="true">list</mat-icon>
+       <a class="nav-link" href="{{ordersUrl}}">Orders</a>
+       </form>      
+   </li>    
+  </ul>
+    <form class="form-inline end ml-auto">
+      <input class="form-control mr-sm-2" type="search" [(ngModel)]="searchText" placeholder="Search Products" name="search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0 bg-black" (click)="searchProduct()" >Search</button>
+    </form>
+    <form class="form-inline end">
+      <button tooltip="Shopping Cart" class= "btn btn-success bg-black"  (click)= "openCart()">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>      
+    </form> 
+    <form class="form-inline end" [hidden]='!isLoggedIn'>
+      <button matTooltip="Logout" class= "btn btn-success bg-black" [hidden]="!isLoggedIn"  (click)= "onLogoutClick()">
+        <mat-icon>cloud_off</mat-icon>
+      </button>      
+    </form> 
+  </div> 
+</nav>
+<p>Hi, {{getUserName()}}</p>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

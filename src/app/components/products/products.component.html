@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-3">
+<div class="sticky-top">
+  <div class="list-group">
+      <mat-action-list>
+          <button mat-list-item (click)="clearFilter()"> All Category </button>
+          <button mat-list-item *ngFor="let c of categories" (click)="applyFilter(c)"> {{c}} </button>
+          <button mat-list-item (click)="gotoCart()"> ShoppingCart </button>
+      </mat-action-list>     
+    </div>
+</div>
+  </div>
+
+  <div class="col">    
+        <ng-container *ngFor="let p of filteredList; let i = index">
+          <div class="col">
+            <app-product-card [product]="p"></app-product-card>
+          </div>
+          <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+        </ng-container>
+  </div>
+</div>
+<br/><br/>
+

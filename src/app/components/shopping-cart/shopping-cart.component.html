@@ -1,0 +1,18 @@
+<ag-grid-angular 
+    style="width: 100%; height: 80%;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    (gridReady) = "onGridReady($event)"
+
+    >
+</ag-grid-angular>
+<br/><br/>
+
+<h3 class="text-center">Total Bill for the cart: {{totalAmount}}</h3>
+<br/><br/>
+<div class='btn-center'>
+<button matTooltip="Place Orders" class= "btn btn-success bg-black"  (click)= "placeOrder()">
+    <mat-icon>gavel</mat-icon>Place Orders
+</button>
+</div>

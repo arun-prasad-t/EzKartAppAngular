@@ -1,0 +1,26 @@
+<div style="text-align:center" class="container-fluid main_container">
+  <h1 class="title">
+    {{ title }}
+  </h1>
+  <img class="img-fluid shopping_icon" src = "/assets/images/shopping_logo.png">  
+
+<div class="buttonForm">
+<form>
+        <button class= "btn btn-success bg-black" [hidden]="isLoggedIn" (click)= "onLoginClick()">
+            <mat-icon>input</mat-icon> Login
+        </button>
+   
+        <button class= "btn btn-primary mr-10 bg-black" [hidden]="isLoggedIn"  (click)= "onRegisterClick()">
+            <mat-icon>assignment</mat-icon> Register
+        </button>
+   
+        <button class= "btn btn-warning bg-black mx-30" [hidden]="isLoggedIn"  (click)= "onGuestClick()">
+            <mat-icon>face</mat-icon> Continue As Guest
+        </button>
+
+        <button class= "btn btn-success bg-black" [hidden]="!isLoggedIn"  (click)= "onLogoutClick()">
+          <mat-icon>cloud_off</mat-icon> Logout
+        </button>
+</form>
+</div>
+</div>

@@ -1,0 +1,83 @@
+import { Http,RequestOptions,Headers } from '@angular/http';
+import { UserProfile } from './../models/userProfile';
+import { ShoppingData } from './../components/data';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserLogin } from '../models/userLogin';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class UserLoginService {
+
+    public loginUrl = '/api/userLogin/login';
+    public registerUrl = '/api/userLogin/register';
+    public loggedIn:boolean = false;
+
+    constructor(private httpClient:HttpClient,
+        public http:Http,
+        private shoppingData:ShoppingData) { }
+
+    public loginUser(loginData:UserLogin){
+        let jsonData = JSON.stringify(loginData);
+        let userDetails;
+        //let headers:HttpHeaders = this.httpClient
+        let header:Headers = new Headers({
+            'X-Request-With' : 'XMLHttpRequest',
+            'X-Page-Url' : window.location.href,
+            'Content-Type' : 'application/json'
+        });                
+        let requestOption:RequestOptions = new RequestOptions({headers:header});                        
+        return this.http.post(this.loginUrl, jsonData, requestOption);                                                
+    }
+
+    public getUser(){
+        let userDetails = localStorage.getItem('user');
+        if(userDetails){
+            let localUserObj = JSON.parse(userDetails);            
+            let userObj = JSON.parse(localUserObj._body);
+            if(userObj){
+                this.shoppingData.loggedInUser = userObj.name; 
+                return userObj;
+            }
+            else{
+                this.shoppingData.loggedInUser = "Guest";
+                return null;
+            }
+        }
+        else{
+            this.shoppingData.loggedInUser = "Guest";
+            return null;
+        }
+    }
+    
+    public isLoggedIn(){
+        this.getUser();
+        if(this.shoppingData.loggedInUser == "Guest"){
+            this.loggedIn = false;
+            return false;
+        }
+        else{
+            this.loggedIn = true;
+            return true;
+        }
+    }
+
+    public logout(){
+        if(this.isLoggedIn()){
+            localStorage.removeItem('user');
+            this.isLoggedIn();                        
+        }
+    }
+
+    public register(userData){
+        let jsonData = JSON.stringify(userData);
+        let userDetails;
+        //let headers:HttpHeaders = this.httpClient
+        let header:Headers = new Headers({
+            'X-Request-With' : 'XMLHttpRequest',
+            'X-Page-Url' : window.location.href,
+            'Content-Type' : 'application/json'
+        });                
+        let requestOption:RequestOptions = new RequestOptions({headers:header});                        
+        return this.http.post(this.registerUrl, jsonData, requestOption); 
+    }
+}
