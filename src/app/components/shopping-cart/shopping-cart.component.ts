@@ -72,6 +72,7 @@ export class ShoppingCartComponent implements OnInit {
       await this.orderService.placeOrder(this.rowData,this.totalAmount).subscribe(order =>{
         if(order){
           this.shoppingCartServices.clearCart();
+          alert("Order Placed continue Shopping....");
           this.router.navigateByUrl(this.productsUrl);
         }
       });

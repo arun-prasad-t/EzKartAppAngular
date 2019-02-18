@@ -10,11 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class ViewOrdersComponent implements OnInit {
 
   columnDefs = [
-    {headerName: 'Order Details', field: 'productDetails' },
-    {headerName: 'Address', field: 'address' },
-    {headerName: 'Phone', field: 'phone'},
-    {headerName: 'TotalPrice', field: 'totalPrice'},
-    {headerName: 'Order Status', field: 'status'}
+    {headerName: 'Order Details', field: 'productDetails',cellClass: "cell-wrap-text",autoHeight: true },
+    {headerName: 'Address', field: 'address',cellClass: "cell-wrap-text",autoHeight: true },
+    {headerName: 'Phone', field: 'phone',cellClass: "cell-wrap-text",autoHeight: true},
+    {headerName: 'TotalPrice', field: 'totalPrice',cellClass: "cell-wrap-text",autoHeight: true},
+    {headerName: 'Order Status', field: 'status',cellClass: "cell-wrap-text",autoHeight: true}
   ];
 
   rowData=[];

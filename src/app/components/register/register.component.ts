@@ -12,12 +12,12 @@ export class RegisterComponent implements OnInit {
 
   productsUrl = '/app-products';
   loginUrl = '/app-login';
-  name:string;
-  pass:string;
-  cpass :string;
-  email:string;
-  address:string;
-  phone:string;
+  name:string = '';
+  pass:string = '';
+  cpass :string = '';
+  email:string = '';
+  address:string = '';
+  phone:string = '';
 
 
   constructor(private router:Router,
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  registerUser(){
+  registerUser(){    
     if(this.name.length>0&& this.address.length>0 && this.email.length>0 && this.pass.length>0 && this.cpass.length>0
       && this.phone.length>0){
         if(this.pass === this.cpass){

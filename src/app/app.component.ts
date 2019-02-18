@@ -56,4 +56,8 @@ export class AppComponent {
     }
   }
 
+  public onLoginClick(){
+    this.router.navigateByUrl(this.loginUrl);
+  }
+
 }

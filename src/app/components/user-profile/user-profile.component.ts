@@ -1,3 +1,4 @@
+import { AppComponent } from './../../app.component';
 import { Router } from '@angular/router';
 import { UserLoginService } from 'src/app/services/userLogin.services';
 import { Component, OnInit } from '@angular/core';
@@ -14,11 +15,12 @@ export class UserProfileComponent implements OnInit {
   email:string;
   address:string;
   phone:string;
+  userDetails;
 
   loginUrl = '/app-login';
-  constructor(private UserLoginService:UserLoginService,
+  constructor(private userLoginService:UserLoginService,
     private router:Router) {
-    if(!this.UserLoginService.isLoggedIn()){
+    if(!this.userLoginService.isLoggedIn()){
       this.router.navigateByUrl(this.loginUrl);
     }
     else{
@@ -30,13 +32,26 @@ export class UserProfileComponent implements OnInit {
   }
 
   getProfile(){
-    let userDetails = this.UserLoginService.getUser();
-    this.name = userDetails.name;
-    this.email = userDetails.email;
-    this.id = userDetails._id;
-    this.address = userDetails.address;
-    this.phone = userDetails.phone;
+    this.userDetails = this.userLoginService.getUser();
+    this.name = this.userDetails.name;
+    this.email = this.userDetails.email;
+    this.id = this.userDetails._id;
+    this.address = this.userDetails.address;
+    this.phone = this.userDetails.phone;
   }
 
+  updateUser(){
+    let updateData = {'_id': this.id,'phone': this.phone,'address':this.address };
+    this.userLoginService.updateUser(updateData).subscribe(data =>{
+      if(data){
+        alert("Profile Updated successfully please login again....");
+        this.userLoginService.logout();
+        window.location.reload();  
+      }
+      else{
+        alert("Profile Updation failed please try again....");
+      }
+    });
+  }
 
 }
