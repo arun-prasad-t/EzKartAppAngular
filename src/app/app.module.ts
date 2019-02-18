@@ -21,7 +21,6 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserLoginService } from './services/userLogin.services';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { ViewOrdersComponent } from './components/view-orders/view-orders.component';
 import { OrderService } from './services/orders.service';
 
@@ -36,8 +35,7 @@ import { OrderService } from './services/orders.service';
     ProductCardComponent,
     ProductQuantityComponent,
     ShoppingCartComponent,
-    UserProfileComponent,
-    PlaceOrderComponent,
+    UserProfileComponent,    
     ViewOrdersComponent
   ],
   imports: [

@@ -1,4 +1,3 @@
-import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { ViewOrdersComponent } from './components/view-orders/view-orders.component';
 import { ModuleWithProviders } from '@angular/core';
 import {LoginComponent} from '../app/components/login/login.component';
@@ -17,8 +16,7 @@ const routes: Routes = [
     { path: 'app-products', component: ProductsComponent},
     { path: 'app-shopping-cart', component:ShoppingCartComponent},
     { path: 'app-user-profile' , component: UserProfileComponent},
-    { path: 'app-view-orders' , component: ViewOrdersComponent},
-    { path: 'app-place-order', component: PlaceOrderComponent}
+    { path: 'app-view-orders' , component: ViewOrdersComponent}    
 
 ];
 
