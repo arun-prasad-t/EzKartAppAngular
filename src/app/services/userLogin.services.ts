@@ -11,6 +11,7 @@ export class UserLoginService {
     public loginUrl = '/api/userLogin/login';
     public registerUrl = '/api/userLogin/register';
     public updateUrl = '/api/userLogin/update';
+    public checkUrl = '/api/userLogin/check';
     public loggedIn:boolean = false;
 
     constructor(private httpClient:HttpClient,
@@ -93,6 +94,19 @@ export class UserLoginService {
         });                
         let requestOption:RequestOptions = new RequestOptions({headers:header});                        
         return this.http.post(this.updateUrl, jsonData, requestOption); 
+    }
+
+    public checkEmail(userData){
+        let jsonData = JSON.stringify(userData);
+        let userDetails;
+        //let headers:HttpHeaders = this.httpClient
+        let header:Headers = new Headers({
+            'X-Request-With' : 'XMLHttpRequest',
+            'X-Page-Url' : window.location.href,
+            'Content-Type' : 'application/json'
+        });                
+        let requestOption:RequestOptions = new RequestOptions({headers:header});                        
+        return this.http.post(this.checkUrl, jsonData, requestOption); 
     }
 
 }

@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  registerUser(){    
+  async registerUser(){     
     if(this.name.length>0&& this.address.length>0 && this.email.length>0 && this.pass.length>0 && this.cpass.length>0
       && this.phone.length>0){
         if(this.pass === this.cpass){
@@ -41,17 +41,7 @@ export class RegisterComponent implements OnInit {
             address: this.address,
             email:this.email
           }
-          this.userLoginService.register(userData).subscribe(data=>{
-              if(data){
-                alert("registration Successful please login");
-                this.router.navigateByUrl(this.loginUrl);
-              }
-              else{
-                alert("Registraion failed Please try again");
-                this.pass= '';
-                this.cpass = '';
-              }
-          });
+          await this.alreadyExists(userData);
         }
         else{
           alert("Passwords didn't match, pease fix it");
@@ -62,6 +52,28 @@ export class RegisterComponent implements OnInit {
       else{
         alert("Please fix all fields and continue registration");
       }
+  }
+
+  async alreadyExists(userData){
+    await this.userLoginService.checkEmail(userData).subscribe(user =>{
+      if(user){
+        alert("User already exists... Please login");        
+      }
+      else{
+        this.userLoginService.register(userData).subscribe(data=>{
+          if(data){
+            if(data)
+            alert("registration Successful please login");
+            this.router.navigateByUrl(this.loginUrl);
+          }
+          else{
+            alert("Registraion failed Please try again...");
+            this.pass= '';
+            this.cpass = '';
+          }
+        });
+      }
+    });    
   }
 
 }
