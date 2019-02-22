@@ -1,9 +1,10 @@
-import { Http,RequestOptions,Headers } from '@angular/http';
+import { Http,RequestOptions,Headers,Response } from '@angular/http';
 import { UserProfile } from './../models/userProfile';
 import { ShoppingData } from './../components/data';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserLogin } from '../models/userLogin';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserLoginService {
@@ -35,10 +36,10 @@ export class UserLoginService {
         let userDetails = localStorage.getItem('user');
         if(userDetails){
             let localUserObj = JSON.parse(userDetails);            
-            let userObj = JSON.parse(localUserObj._body);
-            if(userObj){
-                this.shoppingData.loggedInUser = userObj.name; 
-                return userObj;
+            //let userObj = JSON.parse(localUserObj._body);
+            if(localUserObj){
+                this.shoppingData.loggedInUser = localUserObj.name; 
+                return localUserObj;
             }
             else{
                 this.shoppingData.loggedInUser = "Guest";
@@ -80,7 +81,7 @@ export class UserLoginService {
             'Content-Type' : 'application/json'
         });                
         let requestOption:RequestOptions = new RequestOptions({headers:header});                        
-        return this.http.post(this.registerUrl, jsonData, requestOption); 
+        return this.http.post(this.registerUrl, jsonData, requestOption);
     }
 
     public updateUser(userData){

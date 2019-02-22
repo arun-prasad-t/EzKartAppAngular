@@ -34,9 +34,10 @@ export class ViewOrdersComponent implements OnInit {
 
   getOrders(){
     this.orderService.getOrder().subscribe(data=>{
-      if(data){
-        let jsonResponse = JSON.stringify(data);
-        this.rowData = JSON.parse(JSON.parse(jsonResponse)._body);
+      let responseData = data.json();
+      if(responseData){
+        //let jsonResponse = JSON.stringify(data);
+        this.rowData = responseData;
       }
       else{
         this.rowData = [];

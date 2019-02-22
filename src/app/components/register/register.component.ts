@@ -56,13 +56,15 @@ export class RegisterComponent implements OnInit {
 
   async alreadyExists(userData){
     await this.userLoginService.checkEmail(userData).subscribe(user =>{
-      if(user){
+      let userJson = user.json();
+      if(userJson){
         alert("User already exists... Please login");        
       }
       else{
         this.userLoginService.register(userData).subscribe(data=>{
-          if(data){
-            if(data)
+          let dataJson = data.json();
+          if(dataJson){
+            if(dataJson)
             alert("registration Successful please login");
             this.router.navigateByUrl(this.loginUrl);
           }

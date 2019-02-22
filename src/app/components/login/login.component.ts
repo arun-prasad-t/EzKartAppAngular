@@ -39,8 +39,9 @@ export class LoginComponent implements OnInit {
         password: this.userPass
       }
       await this.userLoginService.loginUser(loginData).subscribe(userData =>{
-        if(userData){
-          localStorage.setItem('user',JSON.stringify(userData));
+        let userJson = userData.json();
+        if(userJson){
+          localStorage.setItem('user',JSON.stringify(userJson));
           this.AppComponent.isLoggedIn = this.userLoginService.isLoggedIn();
           this.router.navigateByUrl(this.productsUrl);
           window.location.reload();                    

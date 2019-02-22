@@ -43,7 +43,8 @@ export class UserProfileComponent implements OnInit {
   updateUser(){
     let updateData = {'_id': this.id,'phone': this.phone,'address':this.address };
     this.userLoginService.updateUser(updateData).subscribe(data =>{
-      if(data){
+      let jsonData = data.json();
+      if(jsonData){
         alert("Profile Updated successfully please login again....");
         this.userLoginService.logout();
         window.location.reload();  
